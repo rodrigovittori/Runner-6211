@@ -19,5 +19,8 @@ public class CharacterScript : MonoBehaviour
         
     }
     
+private void FixedUpdate()
+    { rb.MovePosition(transform.position + transform.forward * speed * Time.deltaTime); }
+
 }
 // Fin de la clase CharacterScript
