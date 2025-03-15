@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Runner 6211
+// Runner 6211 - [M1.L3] - Actividad Nº 3 "¡Corre hacia adelante!"
 
 public class CharacterScript : MonoBehaviour
 {
