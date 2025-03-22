@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Runner 6211 - [M1.L4] - Actividad Nº 4 "¡Vamos a configurar el salto!"
+// Runner 6211 - [M1.L4] - Actividad Nº 5 "Script para la animación de salto"
 
 public class CharacterScript : MonoBehaviour
 {
     [SerializeField] private Rigidbody rb;
     [SerializeField] private float speed; // Velocidad de mov. de mi PJ
     [SerializeField] private float jumpForce; // 7f
+    [SerializeField] Animator anim;
     
     void Start()
     {
@@ -29,9 +30,14 @@ public class CharacterScript : MonoBehaviour
             { transform.Translate(9, 0, 0); } // Mover el personaje 9 unidades a la derecha
 
         // Condición de Salto
-        if ( Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space) )
+        if ( ( Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space) ) && (rb.velocity.y <= 0.1) )
             { rb.AddForce(transform.up * jumpForce, ForceMode.Impulse); }
 
+        if (( Mathf.Abs(rb.velocity.y) > 0 ) && (transform.position.y > 0.1f))
+            { anim.SetBool("jump", true); }
+        else
+            { anim.SetBool("jump", false); }
+        
     }
     
 private void FixedUpdate()
