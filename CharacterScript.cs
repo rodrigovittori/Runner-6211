@@ -10,7 +10,9 @@ public class CharacterScript : MonoBehaviour
     [SerializeField] private float speed; // Velocidad de mov. de mi PJ
     [SerializeField] private float jumpForce; // 7f
     [SerializeField] Animator anim;
-    
+    [SerializeField] GameObject menu; // Ventana de GameOver
+    private bool isGameOver = false;
+
     void Start()
     {
         
@@ -18,7 +20,8 @@ public class CharacterScript : MonoBehaviour
     
     void Update()
     {
-        
+        if (!isGameOver) // Mientras siga en partida
+        {
         /* >> Cambio de carril << */
 
         // Izquierda
@@ -37,11 +40,24 @@ public class CharacterScript : MonoBehaviour
             { anim.SetBool("jump", true); }
         else
             { anim.SetBool("jump", false); }
+        }
         
     }
     
 private void FixedUpdate()
-    { rb.MovePosition(transform.position + transform.forward * speed * Time.deltaTime); }
+    { 
+        if (!isGameOver) // Mientras siga en partida
+            { rb.MovePosition(transform.position + transform.forward * speed * Time.deltaTime); } // El personaje avanza
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Obstacle"))
+            {
+                isGameOver = true;
+                menu.SetActive(true);
+            }
+    }
 
 }
 // Fin de la clase CharacterScript
