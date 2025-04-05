@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 // Runner 6211 - [M1.L4] - Actividad Nº 5 "Script para la animación de salto"
 
@@ -13,6 +14,9 @@ public class CharacterScript : MonoBehaviour
     [SerializeField] GameObject menu; // Ventana de GameOver
     private bool isGameOver = false;
 
+    [SerializeField] TMP_Text score; // TMP text donde muestro la puntuación actual
+    private float roundScore;        // puntuación a mostrar por pantalla
+
     void Start()
     {
         
@@ -22,6 +26,13 @@ public class CharacterScript : MonoBehaviour
     {
         if (!isGameOver) // Mientras siga en partida
         {
+
+        // Aumentar y actualizar puntuación
+        roundScore += Time.deltaTime;
+        score.text = "Puntos: " + roundScore.ToString("f1");
+
+
+
         /* >> Cambio de carril << */
 
         // Izquierda
